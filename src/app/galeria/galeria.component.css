@@ -1,0 +1,20 @@
+.mat-grid-list {
+    width: 80%;
+    margin: 0 auto; /* Centra el grid */
+  }
+mat-grid-tile {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+ }
+ .tile-content {
+    max-width: 50%;
+    max-height: 50%;
+}
+.tile-content img {
+    max-width: 100px;
+  max-height: 100px;
+  width: auto; /* Ancho automático para mantener la proporción */
+  height: auto; /* Altura automática para mantener la proporción */
+  margin: 10px; /* Espacio entre las imágenes */
+}
