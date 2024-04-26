@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GaleriaComponent } from './galeria.component';
+import { NavbarComponent } from './navbar.component';
 
-describe('GaleriaComponent', () => {
-  let component: GaleriaComponent;
-  let fixture: ComponentFixture<GaleriaComponent>;
+describe('NavbarComponent', () => {
+  let component: NavbarComponent;
+  let fixture: ComponentFixture<NavbarComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [GaleriaComponent]
+      declarations: [NavbarComponent]
     });
-    fixture = TestBed.createComponent(GaleriaComponent);
+    fixture = TestBed.createComponent(NavbarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
