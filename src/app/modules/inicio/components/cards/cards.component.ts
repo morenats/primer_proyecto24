@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+//importamos interfaz para animales
+import { Animal } from "src/app/models/animal";
 
 @Component({
   selector: 'app-cards',
@@ -6,5 +8,35 @@ import { Component } from '@angular/core';
   styleUrls: ['./cards.component.css']
 })
 export class CardsComponent {
-
+  //propiedad publica->tipo arreglo
+  public info: Animal[];
+  //inicializar la propiedad info
+  constructor(){
+    this.info = [
+    {
+      id:"",
+      nombre:"Hamster",
+      raza:"Hamster",
+      edad:2,
+      imagen:"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxAPDxANDxAPDQ0NDw0NDQ0NDQ8NDQ0NFREWFhURExUYHSggGBomGxUVITEhJSkrLi4vFx8zODMsNygtLisBCgoKDQ0NDw8PFSsZFRkrKy0rLSsrKysrKystLTcrLSswLTctKzctNzc3NystOCstNy0rLSsrLSsrKysrLSsrLf/AABEIANYA6wMBIgACEQEDEQH/xAAcAAABBQEBAQAAAAAAAAAAAAAAAQIDBAUGBwj/xAAzEAACAQMDAgQFAgUFAAAAAAAAAQIDBBEFEiExQQYTUWEiMnGBkRTBBzNCYqEjUnKx4f/EABgBAQEBAQEAAAAAAAAAAAAAAAEAAgME/8QAGxEBAQEAAwEBAAAAAAAAAAAAAAERAgMhEjH/2gAMAwEAAhEDEQA/APTWwIXIVMzhSgRgWI/ILkjDJYkjZGxwhqREFQghI9sbgEKSA0SZHkEdJkeRXIaIAABIAAZJEBijZMijbEACABgDFEEyDGtkjZMbkUaRbLQJEsUDRlGqIjQ5kcmOoYBoIikAmDYDWWkjYikxyDAaioRvAjY2chRrkNbEYgIoAAgAIxARwxpj0MqsScmNmMTAUQTINiEC5FGg2SNkxjYrGMiEwBBkk3nIRyI5sTJlHyYxhkQQWIMIgZpgQuBEDYEMVDMioZESoRklQjFmmgKxA1AAJLelvf8Ab3YmTUQjNONnF8dGVLmzlDlfEiavGxXTGTF3DGWshCiCZEBiNiSZG2KP3CNjUwJAaOY0iRjcg2NIN1iD8DWCIABgLUVCiIGFpIAqFAmpA2EuCJs0jpMgu7qFKO6pJRXv1Zn61rUbeHDTqPovc4e71CdaW6cnJ+nZBox1d34ppx4ppzf4RlV/E1Xl8JfQwpT7mZd3nOAtax1thrdavVhSUuZyS+3c7+VXyoqC6pcv3PG9C1hWtxCvKPmRjlOOcPD7r3PX7OH6iMayUlCpGM4qS2y2tZROvXIilqE+2eC3a6un8NRbc8Jss/o4xXQzLqtTbcJRfpwuS9duM4ck9zbPdmPOecIqyi1w019VgdaXUI4jKcnFPCco4nH29yzWvYJrdJ7H8uV8w658uj3xREZr0r2h2xn/AIkqhSqdlz6cFrleuxgtjDVu9LS5py+z5/yZUk02n2GOeWATISI8joPYmRMiEgIJkTIp0A2RJIY2CNFEDJitQoCZDcURckM7ymnhySb9yvql2qdNyT5xwcNc15NuTb5FPQZ14Yzujhd8o5fXPEaSdOi8vpv7fY52VxLpuePTLIdmSCvWqym9025P3GxRYltXUq1ai7Ga3IZWbxwYsqU51Y04JynUnGEIrq5N4SNpGl4aoRle22UsqrGSffK5/YC6zwn/AA/p27jWu3G4rLDjTSfk0pff5n9TvtmI8FLfgmp1zcRacnlpiXUYRi3iKwsuTwsIhvdSpUIupUkopd31fsl3Z5n4s8S1bzNKDlSt+8U8SqL+729iplsdBS8a236r9KqX6iFWSpefmO1VHwmotcrOOTZp22xSg/ig1GST52y7pHkFFKm1NfNCSkvqnlHsmkXEby3pXMOHUgt0c/1Lhx/KZlvhzstV761ShGcVgjsK7TwzRvY/CoYccdFLv9DMhQakTt9fU9dBCotufY56tPMm/c0p1lToznLhRi3/AIOdsr6NVZXXusmnm7PxbkyNjmxpOJMhkRoQUXI0ALS6KTGCsRhqwgAKgIIbqrti5exPgpapzTf0ZJxus6lOc8f0rsZir7upZvIrd9DLvryFFZk0v3FRak16jd67HHX3iFyfwLCKNPXasXw+PQi7ipT3EX6NmVo3iJVJKE+JPv6nSRqJma1FCVBpFzw1V23tu+3mxX54/cZcEVo3TnGp3hKM19U8gXsKkYWueKaVtmEP9WsukF0i/wC5/scvqniapVTjH/Sg1yov4pfVnDaprChJpdc8DodDqms1a8t9WWXziPSMV6JGc62TmJatNvOePQtW+ouXoVDWuKh3/wDCTV93nWbfy4rU/o3ia/OH9zzKdVtF/wAK6m7W8oXGcRjNRqe9OXEs/Z5+xF9CVIprDSafZ8lSVhDqsx+j4LSkpJSXKaTTXoxEaO15x4p1usqlWylFQjGSW5Z3ThjKf0eShpNzsa9H1ND+Is6X6ylGLXneTmql2ju+DPv1MOg+hM12MJ5Q8q6f/LRZZMDIjEYmSQTGtjWxCTpMgLgGBCQCJjJyEHuZla5cKNJ+5fzwc94mrcYwSclf3SipTb4SbPNNQ1Cdeo5yk3HL2x7JHe6/bOpRmot5cX0PNaiw2u6YF0Xh3QHeKUnUhTjDq5NJmRqVqqVSVNSU0nhSXRlSFaUeknHPo8ZGqT+pKrNpUanFrqmd7p1fKT9kcpp+nrYqreW+kTprKO2IVStGVRMZKZX8wa55MtahvrnbFvvjg5K4pVJuU1GUl1k+qSOi1BNrCMetqk6NOdJdJ/C+FlGoLWI6mGLG5ceUyCTy2xGbxjW9p99vW19S7nk5uym1OOOucHSxiFjUr27+GOs/qbJUpPNW1xSlnq4Y+B/jj7G74g1ilY287mq+IL4YJpSqTfSEfc8c8B+IY6fcuc1KVGrBwqRh82VzFr7/APY7xbqtfUJ+ZNtU4t+TRT+GnH95e4a2wquqVbi5qXNWWalaTlL0S7RXslx9jobG4y0jmKFrJS5R0ml0Myj9UTLudP8A5aJyK3WI4JJMQJEUmObGMsAAQBwOmyNkxrY1sjadka2JkRgCTfBzmvJNM3qz4ZzWq1cpkY52p/g43X9Fbm6lNLEuqXZnb1YlGujNrUjziVhU6OLX2ZatNHcnzn8HYTp5fYTZtXYNVjOtLHYl7F9TwiKpUIalR4K0SLEqg3zzOqVWMdRg3jSbUjMvtKU8tdSxbVWWXI1GbHHXGm1IP5W16og8iX+1/g7OUvUhmk+yN6zjE0qzw/Ma+iNSpPCJUlgZOnwFpw6zhukjoqMeMexkaVDnk36a4MlVqUuTS0ZfGirURLaVtjTNJ2lGXA6TM60ucpMvxeRxmkyAjEEFAGRuRF0rGsMiMyAI2AjXBFXrS4Zy+pdzp664ZzGpJpskyZsq1YlqayNVPIUxnSiNlE1FboJWGe5ltgVaD7FarTeMHQysmvcoXdPb/wCgHO1E0+Rhs1bWM/YqTs1HuLRtrT4LsKPHIWceMJFpwIKNWmirOBo1IlKu0hZVUyWDISWCEauWvDyblBZRi2sctG7QeESMuOCrGXJNe1FwipGRuCuj06q8I2qMzm9PqZ6G5QlwIXdwjkMyAI9yGAxCTpRAyGTBIxRGJkUjqLsYurW+VlG3Mr1aeSTi3Sw+RVE2NRsP6oozPLaJQkYkkYCJD4hjWhrBk6rQysrqjXkU68eCwyuc6FG8rZfBt3duuxmysuTNJmnVNqLbqNkUbZ9EWqVq8ElWsihXotm1O0ZD5GBZZMKGCaMC+qBJC2EUyzp45Lu/BHGOCGtV7DAiuZ5YlOOWhmcmhY2+Wn6mg1NOpYSNalHBBa0scF6MRRyFEAEUQAFOhbGOQMMGCMhkBCQEbAZNkUdSGTPu7RPpwzR3EVboQYFSk1wRppFu77mBdXTWSTUyQVDn6msOPXlleGtvdzkjHQVLbcRxskQ0NXg0svn8FmN3FhjUJ5EV2FW0p3upRjwnllGGpc5ZFtuKZWqUkQUtRi+5LK4T6BowxpLsRuukLOpkrVmIPnWKdSeWRTqsbuIJqZ0Wmr5TnaJ0endEaZbFHqWkVKPUtCigAokmBRrY3cSdCwDImTIDEASRkkchojAYhgjqrgeR1BDMvKfDOV1Khwzr7lcGHf0spgXDXcOeSs4mzfUPiKM4YAxXjJomjXkujf5EcRC0o6k2ximSyQyUCB9KpguQueOpm4ByA614XK9RtW4yYyqPJYpMlqaTHIjHxFLdudDYPoc/arlHQWS6FBWvSlyXIspUy1CZoJGxjmLIYzSG4QAAOhFQ3IjZknobMbkGyRoZDAjEBMbMRsRsykFaOTLuqXU2ZIp1oCnJ31t7GLcUMHaXNvkxby0CtOZksDGXbmiVJIiYIxw1gEUhriPaHQJIVSJ6ccDxUKIiaEcjYwNC0tmwKSzo8o3LZYK1rbtGhRgagqeMyWEhkYD4xEJcgIBoFATIZJN8RigBIGQAgBGAAkTAABEZXqIAIqlWJn3FIQCrUZlzZRZl19OXPIASZ1WjtIWgAhSYBIABFaFQASX7G33tG/QoJLgAJLtOBYhEANKpkhyABBJMilIAFE3C7hAAP//Z",
+      alt:"hamster triste"
+    },
+    {
+      id:"",
+      nombre:"perro",
+      raza:"perro",
+      edad:5,
+      imagen:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRo6iWnUZ5lRYR8JDu86_VAgBJjXLm3UKEmDGU_4gsIlA&s",
+      alt:"perro"
+    },
+    {
+      id:"",
+      nombre:"gato",
+      raza:"gato",
+      edad:15,
+      imagen:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9rdp2qYbz5h49MVUWEB5NZFYohnUFc8AnrQ&s",
+      alt:"gato"
+    }
+  ]
+  }
 }
