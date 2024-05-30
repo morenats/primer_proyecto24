@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+//archivos de rutas
 import { AutentificacionRoutingModule } from './autentificacion-routing.module';
 //vistas del modulo autentificacion
 import { RegistroComponent } from './pages/registro/registro.component';
@@ -11,7 +11,10 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
+import {MatSelectModule} from '@angular/material/select';
 
+//componentes de angular
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,14 +24,26 @@ import {MatButtonModule} from '@angular/material/button';
   imports: [
     CommonModule,
     AutentificacionRoutingModule,
+    //material
     MatIconModule,
     MatInputModule,
     MatFormFieldModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule,
+    //angular
+    FormsModule
   ],
   exports:[
     RegistroComponent,
-    IniciosesionComponent
+    IniciosesionComponent,
+    //material
+    MatIconModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatSelectModule,
+    //angular
+    FormsModule
   ]
 })
 export class AutentificacionModule { }
