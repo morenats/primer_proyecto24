@@ -5,12 +5,12 @@
         <!-- email de usuario -->
         <mat-form-field appearance="fill">
             <mat-label>Ingrese su email</mat-label>
-            <input [(ngModel)]="" matInput placeholder="Placeholder" required>
+            <input [(ngModel)]="usuarios.email" matInput placeholder="Placeholder" required>
         </mat-form-field>
          <!-- contraseña de usuario -->
          <mat-form-field>
             <mat-label>ingrese su contraseña</mat-label>
-            <input [(ngModel)]="" matInput [type]="hide ? 'password' : 'text'" #input minlength="6" required>
+            <input [(ngModel)]="usuarios.password" matInput [type]="hide ? 'password' : 'text'" #input minlength="6" required>
             <button class="boton" mat-icon-button matSuffix (click)="hide =! hide " [attr.aria-label]="'Hide password'"
                 [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -18,6 +18,6 @@
             <mat-hint align="start">Minimo:6/{{input.value.length}}</mat-hint>
         </mat-form-field>
         <!-- boton para enviar informacion -->
-        <button mat-raised-button color="primary" class="boton" (click)="">Enviar</button>
+        <button mat-raised-button color="primary" class="boton" (click)="iniciosesion()">Enviar</button>
     </div>
 </div>
