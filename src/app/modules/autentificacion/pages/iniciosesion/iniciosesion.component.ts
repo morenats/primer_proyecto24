@@ -34,12 +34,11 @@ export class IniciosesionComponent {
       {
         uid: "",
         nombre: "val",
-        apellido: "coassin",
+        apellido: "coassin-fernandez",
         email: "vala@gmail.com",
         rol: "administrador",
         password: "val123"
       }
-
     ]
   }
   //############################### FIN LOCAL
