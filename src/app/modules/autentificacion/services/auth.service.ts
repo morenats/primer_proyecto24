@@ -10,6 +10,7 @@ export class AuthService {
   constructor(public auth:AngularFireAuth) { }
 
   //funcion para tomar uid
+  
 
   //funcion para el registro
   registrar(email:string, password: string){
@@ -29,5 +30,4 @@ export class AuthService {
     //devolver promesa vacia
     return this.auth.signOut();
   }
-  //funcion para 
 }

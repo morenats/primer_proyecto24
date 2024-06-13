@@ -58,9 +58,9 @@ export class IniciosesionComponent {
 
   //creo una funcion para comparar cuando el usuario envie su email y contraseña
   iniciosesion() {
-    //creo una repetitiva para comparar el arreglo de los usuarios guardados con lo que ingreso el usuario
     let emailcorrecto = false; //declaro variable email en falso
     let passwordcorrecta = false;  //declaro variable contraseña en falso
+    //creo una repetitiva para comparar el arreglo de los usuarios guardados con lo que ingreso el usuario
     for (let i = 0; i < this.guardar.length; i++) {
       const usuariolocal = this.guardar[i]
       if (usuariolocal.email === this.usuarios.email && usuariolocal.password === this.usuarios.password) {
