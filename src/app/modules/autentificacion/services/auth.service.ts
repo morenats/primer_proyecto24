@@ -10,7 +10,17 @@ export class AuthService {
   constructor(public auth:AngularFireAuth) { }
 
   //funcion para tomar uid
-  
+  async obtenerUid(){
+    //nos va a generar una promesa y la constante la va a capturar 
+    const user = await this.auth.currentUser;
+    //si el usuario no respeta la estructura de la interfaz
+    // o si tuvo problemas para el registro -->ej.mal internet
+    if (user == null) {
+      return null
+    } else{
+      return user.uid
+    }
+  }
 
   //funcion para el registro
   registrar(email:string, password: string){

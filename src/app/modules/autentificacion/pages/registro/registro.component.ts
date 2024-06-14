@@ -2,9 +2,12 @@ import { Component } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario';
 //SERVICIO DE AUTENTIFICACION
 import { AuthService } from '../../services/auth.service';
+//servicio de firestore
+import { FirestoreService } from 'src/app/modules/shared/services/firestore.service';
 //servicio de rutas que otorga angular
 import { Router } from '@angular/router';
-import { EmailValidator } from '@angular/forms';
+
+
 
 @Component({
   selector: 'app-registro',
@@ -28,8 +31,9 @@ export class RegistroComponent {
   coleccionusuarios: Usuario[] = [];
 
   constructor(
-    public servicioAuth: AuthService,
-    public servicioRutas: Router
+    public servicioAuth: AuthService, //metodo de autentificacion
+    public servicioFirestore: FirestoreService, //vincula UID con la collecion
+    public servicioRutas: Router// metodo de navegacion
   ) { }
 
   //FUNCION PARA REGISTRO
@@ -73,8 +77,26 @@ export class RegistroComponent {
       alert("hubo un problema al registrar un nuevo usuario :")
     })
 
+    const uid = await this.servicioAuth.obtenerUid();
+
+    this.usuarios.uid = uid
+
+    //llamamos a la funcion
+    this.guardarUsuario();
+
     //llamamos a la funcion para limpiar el formulario
     this.limpiarinput()
+  }
+
+  //funcion para agregar nuevo usuario
+  async guardarUsuario(){
+    this.servicioFirestore.agregarUsuario(this.usuarios, this.usuarios.uid)
+    .then(err => {
+      console.log(this.usuarios)
+    })
+    .catch(err => {
+      console.log('Error =>', err)
+    })
   }
 
   //funcion para limpiar los inputs
