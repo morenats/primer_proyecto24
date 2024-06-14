@@ -1,3 +1,4 @@
+//interfaz para las cards
 export interface Animal {   
     id:string;
     nombre:string;
