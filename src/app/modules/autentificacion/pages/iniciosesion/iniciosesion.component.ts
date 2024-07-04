@@ -4,7 +4,7 @@ import { Usuario } from 'src/app/models/usuario';
 import { AuthService } from '../../services/auth.service';
 import { FirestoreService } from 'src/app/modules/shared/services/firestore.service';
 import { Router } from '@angular/router';
-
+import * as CryptoJS from 'crypto-js';
 @Component({
   selector: 'app-iniciosesion',
   templateUrl: './iniciosesion.component.html',
@@ -111,7 +111,39 @@ export class IniciosesionComponent {
       password: this.usuarios.password
 
     }
-    const res = await this.servicioAuth.iniciarsesion(credenciales.email, credenciales.password)
+
+    try{
+      //obtenemos el usuario desde la BD -> cloud firestore
+      const usuarioBD = await this.servicioAuth.obtenerUsuario(credenciales.email);
+
+      // !: si es diferente
+      //.empty -> metodo de firebase para marcar algo vacio
+      if (!usuarioBD || usuarioBD.empty) {
+        alert('correo electronico no registrado')
+        this.limpiarinput();
+        return
+      }
+
+      //primer documento (registro) en la coleccion de usuarios que se obtiene desde la consulta.
+      const usuarioDoc = usuarioBD.docs[0]
+
+      //extraer los datos del documento en forma de un objeto y se especifica como del tipo
+      // "Usuario" -> haciendo referencia a nuestra interfaz de usuario. 
+      const usuarioData = usuarioDoc.data() as Usuario
+
+      //hash de la contraseña ingresada por el usuario
+      const hashedPassword = CryptoJS.SHA256(credenciales.password).toString();
+
+      if (hashedPassword !== usuarioData.password) {
+        alert("Contraseña incorrecta");
+
+        this.usuarios.password = '';
+        return;
+        
+      }
+
+      
+      const res = await this.servicioAuth.iniciarsesion(credenciales.email, credenciales.password)
       .then(res => {
         alert("se ha logueado con exito :) ")
         
@@ -123,6 +155,11 @@ export class IniciosesionComponent {
         this.limpiarinput()
       })
 
+    }catch(error){
+      this.limpiarinput();
+    }
+
+   
   }
   //funcion para limpiar los inputs
   limpiarinput() {

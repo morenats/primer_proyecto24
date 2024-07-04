@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 //servicio de autentificaion de firebase
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   //referenciar auth de firebase para inicializarlo
-  constructor(public auth:AngularFireAuth) { }
+  constructor(
+    private auth:AngularFireAuth,
+    private servicioFirestore: AngularFirestore
+  ) { }
 
   //funcion para tomar uid
   async obtenerUid(){
@@ -39,5 +43,10 @@ export class AuthService {
   cerrarsesion(){
     //devolver promesa vacia
     return this.auth.signOut();
+  }
+
+  //Funcion que busca un usuario en la coleccion de 'usuarios' cuyo correo electronico coincida con el valor proporcionado
+  obtenerUsuario(email:string){
+    return this.servicioFirestore.collection('usuarios', ref => ref.where('email','==',email)).get().toPromise();
   }
 }
