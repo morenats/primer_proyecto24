@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 
 //importamos paqueteria de criptacion 
 import * as CryptoJS from 'crypto-js';
+//importamos paqueteria de Sweetalert para alertas personalidad
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registro',
@@ -67,7 +69,11 @@ export class RegistroComponent {
     const res = await this.servicioAuth.registrar(credenciales.email, credenciales.password)
     //el metodo then nos devuelve la respuesta esperada por la promesa
     .then(res =>{
-      alert("ha agregado un usuario con exito :")
+      Swal.fire({
+        title: "Buen trabajo!",
+        text: "Ha agregado un usuario con exito :)",
+        icon: "success"
+      });
 
       //accedemos al sercicio de rutas -> metodo navigate
       //metodo NAVIGATE = perimite dirigirnos a diferentes vistas
@@ -75,7 +81,11 @@ export class RegistroComponent {
     })
 
     .catch(error=> {
-      alert("hubo un problema al registrar un nuevo usuario :")
+      Swal.fire({
+        title: "Ho no!",
+        text: "Hubo un problema al registrar un nuevo usuario :(",
+        icon: "error"
+      });
     })
 
     const uid = await this.servicioAuth.obtenerUid();
