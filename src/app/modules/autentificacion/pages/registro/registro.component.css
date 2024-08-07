@@ -3,8 +3,9 @@
     padding: 10px;
     text-align: center;
     justify-content: center;
+    width: 50%;
 }
 .boton{
-    width: 120px;
+    width: 50%;
     margin: auto;
 }

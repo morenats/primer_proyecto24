@@ -26,4 +26,36 @@ export class TableComponent {
 
   constructor(public servicioCrud: CrudService){
   }
+
+  ngOnInit(): void{
+    //suscribe -> notifica constantemente los cambios actuales del sistema 
+    this.servicioCrud.obtenerProducto().subscribe(producto => {
+      //guarda la informacion recibida como un nuevo "producto" a la coleccion
+      this.coleccionProductos = producto;
+    })
+  }
+
+  async agregarProducto(){
+    if (this.producto.valid) {
+      let nuevoProducto: Producto = {
+        //idproducto no se toma porque es generado por la BD y no por el usuario
+        idProducto:'',
+        //el resto es tomado con informacion ingresada por el usuario
+        nombre:this.producto.value.nombre!,
+        precio:this.producto.value.precio!,
+        descripcion: this.producto.value.descripcion!,
+        categoria: this.producto.value.categoria!,
+        imagen: this.producto.value.imagen!,
+        alt: this.producto.value.alt!
+      }
+
+      await this.servicioCrud.crearProducto(nuevoProducto)
+      .then(producto => {
+        alert("ha agregado un nuevo producto con exito")
+      })
+      .catch(error => {
+        alert("hubo un problema al agregar un nuevo producto producto")
+      })
+    }
+  }
 }

@@ -21,7 +21,7 @@
             <td>{{producto.precio}}</td>
             <td>{{producto.descripcion}}</td>
             <td>{{producto.categoria}}</td>
-            
+
             <!-- Acciones -->
             <td>
                 <button id="btn-edit" title="editar" type="button" class="btn btn-outline-warning">
@@ -36,3 +36,58 @@
         </tr>
     </tbody>
 </table>
+
+<!-- Button para agregar productos -->
+<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#agregarproducto">
+    Agregar un nuevo producto
+</button>
+
+<!-- Modal para agregar productos -->
+<div class="modal fade" id="agregarproducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- encabezado modal -->
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Ingrese un nuevo producto</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <!-- cuerpo modal -->
+            <div [formGroup]="producto" class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">Ingrese el nombre del producto</label>
+                    <input type="text" class="form-control" formControlName="nombre" placeholder="Ej.: Meme de hamster triste">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Ingrese el precio del producto</label>
+                    <input type="number" class="form-control" formControlName="nombre" placeholder="...">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Ingrese la descripcion del producto</label>
+                    <input type="text" class="form-control" formControlName="nombre" placeholder="Ej.: Meme de hamster triste">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Seleccione una categoria</label>
+                    <select class="form-control" class="form-select" formControlName="categoria">
+                        <option value="alimentacion"></option>
+                        <option value="indumentaria"></option>
+                        <option value="juguetes"></option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Ingrese una imagen</label>
+                    <input type="text" class="form-control" formControlName="imagen" placeholder="Ej.: Meme de hamster triste">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Ingrese un texto alternativo</label>
+                    <input type="text" class="form-control" formControlName="nombre" placeholder="Ej.: Meme de hamster triste">
+                </div>
+            </div>
+
+            <!-- acciones del modal -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Guardar</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
