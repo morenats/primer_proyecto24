@@ -68,9 +68,9 @@
                 <div class="mb-3">
                     <label class="form-label">Seleccione una categoria</label>
                     <select class="form-control" class="form-select" formControlName="categoria">
-                        <option value="alimentacion"></option>
-                        <option value="indumentaria"></option>
-                        <option value="juguetes"></option>
+                        <option value="alimentacion">alimentacion</option>
+                        <option value="indumentaria">indumentaria</option>
+                        <option value="juguetes">juguetes</option>
                     </select>
                 </div>
                 <div class="mb-3">
@@ -85,7 +85,7 @@
 
             <!-- acciones del modal -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Guardar</button>
+                <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" (click)="agregarProducto()">Guardar</button>
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
